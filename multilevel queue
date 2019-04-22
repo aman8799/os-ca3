@@ -91,7 +91,56 @@ void qload(int ttime)
 		}
 	}
 }
+bool cmp2(int a, int b)
+{
+	if(find(a).priority!=find(b).priority)
+	return find(a).priority<find(b).priority;
+}
 
+void qload2 (int ttime)
+{
+	vector <int> a;
+	int flag=0;
+	for(int i=0; i<p; i++)
+	{
+		if(pro[i].at==ttime)
+		{
+			if(pro[i].priority>=4 and pro[i].priority<=6)
+			{
+				a.push_back(pro[i].pid);
+				flag=1;
+			}
+		}
+	}
+	int cnt=1;
+	if(flag==1)
+	{
+		int x=q2.size();
+		for(int j=0; j<x; j++)
+		{
+			a.push_back(q2.front());
+			q2.pop();
+			cnt++;
+		}
+		sort(a.begin(),a.end(), cmp2);
+		for(int j=0; j<a.size(); j++)
+		{
+			q2.push(a[j]);
+		}
+	}
+}
+
+
+void proupdate(int b, int id)
+{
+	for(int i=0; i<p; i++)
+	{
+		if(pro[i].pid==id)
+		{
+			pro[i].burst=b;
+		}
+	}
+}
 
 
 

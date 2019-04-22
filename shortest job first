@@ -31,5 +31,16 @@ int main()
 		}
 	}
 	cout<<"\n Waiting time  \t\t\t\t  Turn around time \n";
+	j=0;
+	for(i=0;i<a;i++)
+	{
+		wait[i] = j;
+		j = burst_time[i] + j;
+		cout<<"\n P"<<proc[i]+1<<" : "<<wait[i]<<"\t\t\t\t\t\t"<<wait[i] + burst_time[i] ;
+		avg_waiting_time = wait[i];
+		avg_turnaround_time+=wait[i]+burst_time[i];
+	}
+	cout<<"\n\n";
+	cout<<"Average waiting time:"<< avg_waiting_time/(float)a<<"\Average Turn Around Time:" <<avg_turnaround_time/(float)a<<"\n\n";
 	
 }

@@ -305,6 +305,69 @@ int main()
 				qload2(ttime);
 			}
 		}
+		t=0;
+		
+		if(q3.size()!=0)
+		{
+			curr=q3.front();
+			currpro=find(curr);
+			b=currpro.burst;
+		}
+		while(t<10 && q3.size()!=0)
+		{
+			if(q3.front()!=prev)
+			{
+				cout<<" <"<<ttime<<"> -P"<<q3.front()-100<<"-";
+				prostart(ttime, q3.front());
+			}
+			prev=q3.front();
+			b--;
+			t++;
+			ttime++;
+			proupdate(b,q3.front());
+			qload(ttime);
+			qload2(ttime);
+			if(t==10)
+			{
+				proupdate(b,q3.front());
+				int x=q3.front();
+			}
+				if(b==0)
+				{
+					proend(ttime, q3.front());
+					q3.pop();
+					if(q3.size()!=0)
+					{
+						curr=q3.front();
+						currpro=find(curr);
+						b=currpro.burst;
+						
+					}
+					else
+					t=10;
+				}
+		}
+		
+		if(q2.size()==0 && q1.size()==0 && q3.size()==0)
+		{
+			if(procheck())
+			{
+				cout<<" <"<<ttime<<"> \n";
+				tot=ttime;
+				flagclose=1;
+			}
+			else
+			{
+				cout<<" <"<<ttime<<">"<<" -X-";
+				
+				ttime++;
+				qload(ttime);
+				qload2(ttime);
+			}
+			
+		}
+	}	
+	showall();
 }
 
 

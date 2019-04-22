@@ -56,6 +56,41 @@ void enterprocess(int p)
 		pro[i].end=-1;
 	}
 }
+queue <int> q1;
+queue <int> q2;
+queue <int> q3;
+
+void showall()
+{
+	int avgwt=0, avgtat=0;
+	cout<<endl<<setw(7)<<"    Process"<<setw(15)<<"Arrival Time"<<setw(10)<<"Priority"<<setw(15)<<"Burst Time"<<setw(10)<<"Start Time"<<setw(20)<<"Completition Time"<<setw(15)<<"Waiting Time"<<setw(20)<<"Turnaround Time";	
+	for(int i=0; i<p; i++)
+	{
+		pro[i].wt=(pro[i].start-pro[i].at)+((pro[i].end-pro[i].start)-pro[i].burst2);
+		pro[i].tat=pro[i].wt+pro[i].burst2;
+		avgwt+=pro[i].wt;
+		avgtat+=pro[i].tat;
+		cout<<endl<<setw(7)<<"P"<<pro[i].pid-100<<setw(15)<<pro[i].at<<setw(10)<<pro[i].priority<<setw(15)<<pro[i].burst2<<setw(10)<<pro[i].start<<setw(20)<<pro[i].end<<setw(15)<<pro[i].wt<<setw(20)<<pro[i].tat;	
+	}
+	
+	cout<<"\n\n\n\tAverage Waiting Time -->"<<(float)avgwt/p<<"\n\tAverage Turnaround Time -->"<<(float)avgtat/p<<"\n\t";
+	
+}
+void qload(int ttime)
+{
+	for(int i=0; i<p; i++)
+	{
+		if(pro[i].at==ttime)
+		{
+			if(pro[i].priority>0 && pro[i].priority<=3)
+			{
+				q1.push(pro[i].pid);
+			}
+			else if(pro[i].priority>=7 && pro[i].priority<=9)
+				q3.push(pro[i].pid);
+		}
+	}
+}
 
 
 

@@ -181,6 +181,131 @@ void proend(int ttime, int id)
 		}
 	}
 }
+int main()
+{
+	int prev=0;
+	re_pr:
+	cout<<"\nNo of processes: ";
+	cin>>p;
+	if(p<1)
+	{
+		cout<<"No. of processes must be greater than 0. Enter again.";
+		goto re_pr;
+	}
+	enterprocess(p);
+	int flagclose=0;
+	qload(ttime);
+	qload2(ttime);
+	int t=0;
+	cout<<"\n";
+	while( flagclose==0)
+	{
+		int t1=0;
+		int curr, b;
+		t=0;
+		if(!q1.empty())
+		{
+			curr=q1.front();
+			currpro=find(curr);
+			b=currpro.burst;
+		}
+		while(t1<4 && t<10 && q1.size()!=0)
+		{
+			if(q1.front()!=prev)
+			{
+				cout<<" <"<<ttime<<"> -P"<<q1.front()-100<<"-";
+				prostart(ttime, q1.front());
+			}
+			prev=q1.front();
+			b--;
+			t++;
+			t1++;
+			ttime++;
+			proupdate(b,q1.front());
+			qload(ttime);
+			qload2(ttime);
+			if(t==10)
+			{
+				proupdate(b,q1.front());
+			}
+			if(t1==4 || b==0)
+			{
+				if(b==0)
+				{
+					proend(ttime, q1.front());
+					q1.pop();
+				}
+				if(b!=0)
+				{
+					proupdate(b,q1.front());
+					int x=q1.front();
+					q1.pop();
+					q1.push(x);
+				}
+				if(q1.size()!=0)
+				{
+					curr=q1.front();
+					currpro=find(curr);
+					b=currpro.burst;
+					t1=0;
+				}
+				else
+				t=10;
+			}		
+		}
+		
+		
+		t=0;
+		
+		if(q2.size()!=0)
+		{
+			curr=q2.front();
+			currpro=find(curr);
+			b=currpro.burst;
+		}
+		
+		while(t<10 && q2.size()!=0)
+		{
+			curr=q2.front();
+			currpro=find(curr);
+			b=currpro.burst;
+			if(q2.front()!=prev)
+			{
+				cout<<" <"<<ttime<<"> -P"<<q2.front()-100<<"-";
+				prostart(ttime, q2.front());
+			}
+			prev=q2.front();
+			b--;
+			t++;
+			ttime++;
+			proupdate(b,q2.front());
+			
+			if(t==10 && b>0)
+			{
+				proupdate(b,q2.front());	
+			}
+			if(b==0)
+			{
+				proend(ttime, q2.front());
+				q2.pop();
+				qload(ttime);
+				qload2(ttime);
+				if(q2.size()!=0)
+				{
+					curr=q2.front();
+					currpro=find(curr);
+					b=currpro.burst;
+				}
+				else
+					t=10;
+			}
+			else
+			{
+				qload(ttime);
+				qload2(ttime);
+			}
+		}
+}
 
 
 

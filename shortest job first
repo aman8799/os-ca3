@@ -30,5 +30,6 @@ int main()
 			}
 		}
 	}
+	cout<<"\n Waiting time  \t\t\t\t  Turn around time \n";
 	
 }

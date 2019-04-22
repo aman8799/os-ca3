@@ -141,6 +141,47 @@ void proupdate(int b, int id)
 		}
 	}
 }
+struct process currpro;
+
+bool procheck()
+{
+	for(int i=0; i<p; i++)
+	{
+		if(pro[i].burst!=0)
+			return false;
+	}
+	return true;
+
+}
+
+void prostart(int ttime, int id)
+{
+	for(int i=0; i<p; i++)
+	{
+		if(pro[i].pid==id)
+		{
+			if(pro[i].start==-1)
+			pro[i].start=ttime;
+			else
+			pro[i].start=min(pro[i].start,ttime);
+		}
+	}
+}
+
+void proend(int ttime, int id)
+{ 
+	for(int i=0; i<p; i++)
+	{
+		if(pro[i].pid==id)
+		{
+			if(pro[i].end==-1)
+			pro[i].end=ttime;
+			else
+			pro[i].end=max(pro[i].end,ttime);
+		}
+	}
+}
+
 
 
 

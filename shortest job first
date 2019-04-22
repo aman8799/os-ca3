@@ -15,5 +15,20 @@ int main()
 		proc[i] = i;
 		cout<<"\n";
 	}
+	for(i=0;i<a;i++)
+	{
+		for(j=i;j<a;j++)
+		{
+			if(burst_time[i]>burst_time[j])
+			{
+				temp = burst_time[i];
+				burst_time[i] = burst_time[j];
+				burst_time[j] = temp;
+				temp = proc[i];
+				proc[i] = proc[j];
+				proc[j] = temp;
+			}
+		}
+	}
 	
 }

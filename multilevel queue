@@ -21,5 +21,43 @@ struct process find (int pid)
 		}
 	}
 }
+void enterprocess(int p)
+{
+	for(int i=0; i<p; i++)
+	{
+		cout<<"\nFor process P"<<i+1;
+		pro[i].pid=100+(i+1);
+		re_at:
+		cout<<"\nAT: ";
+		cin>>pro[i].at;
+		if(pro[i].at<0)
+		{
+			cout<<"\nArrival time cannot be negative. Please enter again";
+			goto re_at;
+		}
+		re_pri:
+		cout<<"\nPriority (1-9): ";
+		cin>>pro[i].priority;
+		if(pro[i].priority<1 || pro[i].priority>9)
+		{
+			cout<<"\nPriority has to be an integer between 1 and 9. Please enter again";
+			goto re_pri;
+		}
+		re_burst:
+		cout<<"\nBurst: ";
+		cin>>pro[i].burst;
+		if(pro[i].burst<1)
+		{
+			cout<<"\nBurst time cannot be 0 or negative. Please enter again";
+			goto re_burst;
+		}
+		pro[i].burst2=pro[i].burst;
+		pro[i].start=-1;
+		pro[i].end=-1;
+	}
+}
+
+
+
 
 
